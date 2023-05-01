@@ -6,7 +6,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in "task[title]", with: "task_name"
         fill_in "task[content]", with: "task_content"
-        click_on "Create Task"
+        click_on "登録する"
         expect(page).to have_content "Task was successfully created."
       end
     end
@@ -23,6 +23,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '詳細表示機能' do
     context '任意のタスク詳細画面に遷移した場合' do
       it '該当タスクの内容が表示される' do
+        task = FactoryBot.create(:task, title: 'task')
         visit tasks_path
         expect(page).to have_content 'Title'
         expect(page).to have_content 'Content'
