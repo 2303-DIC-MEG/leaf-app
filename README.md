@@ -20,14 +20,14 @@
 | title             | string    |
 
 
-## Heroku deploy flow
+# Heroku deploy flow
 
-# GemfileにGemを追加する（Ruby３系を使用している場合）
+## GemfileにGemを追加する（Ruby３系を使用している場合）
 gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
 
-# 作成しているアプリのディレクトリに行き - heroku create git commitコマンドを使用して、コミット
+## 作成しているアプリのディレクトリに行き - heroku create git commitコマンドを使用して、コミット
 1. git add
    git commit
    Heroku buildpackを追加する
