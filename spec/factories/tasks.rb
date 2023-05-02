@@ -5,6 +5,6 @@ FactoryBot.define do
   end
   factory :second_task, class: Task do
     title { 'test_title_2' }
-    content { 'test_titel_2' }
+    content { 'test_content_2' }
   end
 end
