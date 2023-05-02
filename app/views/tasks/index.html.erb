@@ -13,8 +13,9 @@
   </thead>
 
   <tbody>
+    
     <% @tasks.each do |task| %>
-      <tr>
+      <tr class = "task_list">
         <td><%= task.title %></td>
         <td><%= task.content %></td>
         <td><%= task.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
@@ -29,4 +30,5 @@
 <br>
 
 <%= link_to 'New Task', new_task_path %>
+
 
