@@ -36,6 +36,14 @@ RSpec.describe 'タスク管理機能', type: :system do
       expect(task_list.first).to have_content 'task'
     end
   end
+  context 'タスクが終了期限の降順に並んでいる場合' do
+    it '終了期限が一番近いタスクが表示される' do
+      visit tasks_path
+      task_list = all('.task_list')
+      click_on "deadline▼"
+      expect(task_list.first).to have_content 'task'
+    end
+  end
 end
 
 
