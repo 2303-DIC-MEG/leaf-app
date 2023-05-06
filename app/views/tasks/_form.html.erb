@@ -28,7 +28,9 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.text_field :status %>
+    <%= form.select :status,  [["Not started", "Not started"], 
+                                ["In progress", "In progress"], 
+                                ["Completed", "Completed"]] %>
   </div>
 
   <div class="field">
