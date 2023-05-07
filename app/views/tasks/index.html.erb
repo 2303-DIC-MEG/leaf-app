@@ -18,8 +18,10 @@
 <% end %>
 <br>
 <br>
-
-  
+<%= link_to 'New Task', new_task_path %>
+<%= link_to 'Back', tasks_path %>
+<br>
+<br>
 <table>
   <thead>
     <tr>
@@ -52,7 +54,6 @@
 </table>
 
 <br>
+<%= paginate @tasks %>
 
-<%= link_to 'New Task', new_task_path %>
-<%= link_to 'Back', tasks_path %>
 
