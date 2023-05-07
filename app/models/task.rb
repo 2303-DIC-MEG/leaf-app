@@ -4,5 +4,9 @@ class Task < ApplicationRecord
   validates :status, presence: true
   validates :priority, presence: true
 
+  enum priority: { High: 0, Middle: 1, Low: 2 }
+
   scope :sort_expired_at, -> {order(expired_at: :desc)}
+  scope :sort_priority, -> { order(priority: :asc) }
+  
 end

@@ -30,12 +30,13 @@
     <%= form.label :status %>
     <%= form.select :status,  [["Not started", "Not started"], 
                                 ["In progress", "In progress"], 
-                                ["Completed", "Completed"]] %>
+                                ["Completed", "Completed"]],
+                                { include_blank: " "} %>
   </div>
 
   <div class="field">
     <%= form.label :priority %>
-    <%= form.text_field :priority %>
+    <%= form.select :priority, Task.priorities.keys.to_a, { include_blank: " "}%>
   </div>
 
 <br>

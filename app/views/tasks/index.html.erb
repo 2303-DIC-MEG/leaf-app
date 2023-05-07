@@ -1,7 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tasks</h1>
+<br>
 
+<h4>Search</h4>
+<%= form_with local: true, method: :get, url: tasks_path do |form| %>
+  <div class ="search_form">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+    <%= form.label :status %>
+        <%= form.select :status,  [["Not started", "Not started"], 
+                                ["In progress", "In progress"], 
+                                ["Completed", "Completed"]],
+                                { include_blank: " "} %>
+    <%= form.submit 'search' %>
+  </div>
+<% end %>
+<br>
+<br>
+
+  
 <table>
   <thead>
     <tr>
@@ -10,7 +28,7 @@
       <th><%= link_to "deadline▼", tasks_path(sort_expired_at: "true") %></th>
       <th>Created_at</th>
       <th>Status</th>
-      <th>Priority</th>
+      <th><%= link_to "priority▼", tasks_path(sort_priority: "true") %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -36,5 +54,5 @@
 <br>
 
 <%= link_to 'New Task', new_task_path %>
-
+<%= link_to 'Back', tasks_path %>
 
