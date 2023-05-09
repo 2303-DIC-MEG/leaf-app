@@ -35,3 +35,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'faker'
 gem 'bcrypt'
+gem 'kaminari'
+
+gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'
