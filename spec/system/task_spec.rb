@@ -8,6 +8,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in "task[title]", with: "task_name"
         fill_in "task[content]", with: "task_content"
+        fill_in 'task_expired_at', with: DateTime.new(2024, 9, 1, 18, 30)
+        select 'Not started', from: 'task[status]'
+        select 'High', from: 'task[priority]'
         click_on "登録する"
         expect(page).to have_content "Task was successfully created."
       end
@@ -42,6 +45,34 @@ RSpec.describe 'タスク管理機能', type: :system do
       task_list = all('.task_list')
       click_on "deadline▼"
       expect(task_list.first).to have_content 'task'
+    end
+  end
+  describe '検索機能' do
+    before do
+      visit tasks_path
+    end
+    context 'タイトルであいまい検索をした場合' do
+      it "検索キーワードを含むタスクで絞り込まれる" do
+        fill_in "task[title]", with: "task"
+        click_on 'search'
+        expect(page).to have_content 'task'
+      end
+    end
+    context 'ステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        select 'Completed',from: 'task_status'
+        click_on 'search'
+        expect(page).to have_content 'Completed'
+      end
+    end
+    context 'タイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        fill_in 'task[title]', with: 'task'
+        select 'Completed',from: 'task_status'
+        click_on 'search'
+        expect(page).to have_content 'task'
+        expect(page).to have_content 'Completed'
+      end
     end
   end
 end

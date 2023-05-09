@@ -4,20 +4,28 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
     if params[:sort_expired_at]
-      @tasks = @tasks.all.sort_expired_at.page(params[:page])
+      @tasks = @tasks.all.sort_expired_at
     elsif params[:sort_priority]
-      @tasks = @tasks.all.sort_priority.page(params[:page])
+      @tasks = @tasks.all.sort_priority
     elsif  
       @tasks = @tasks.all.order(created_at: :desc)
     end
-    if params[:title].present? && params[:status].present?
-      @tasks = @tasks.where('title LIKE ?', "%#{params[:title]}%").where('status LIKE ?', "%#{params[:status]}%")
-    elsif params[:title].present?
-      @tasks = @tasks.where('title LIKE ?', "%#{params[:title]}%")
-    elsif params[:status].present?
-      @tasks = @tasks.where('status LIKE ?', "%#{params[:status]}%")
-    end 
+
+    #あいまい検索機能
+    if params[:task].present?
+      title = params[:task][:title]
+      status = params[:task][:status]
+      if title.present? && status.present?
+        @tasks = @tasks.title_search(title).status_search(status)
+      elsif title.present? && status.blank?
+        @tasks = @tasks.title_search(title)
+      else
+        @tasks = @tasks.status_search(status)
+      end
+    end
+    @tasks = @tasks.page(params[:page]).per(8)
   end
+
   
 
   def show
