@@ -42,7 +42,10 @@ class Admin::UsersController < ApplicationController
   private
 
   def admin_user
-    redirect_to (root_path) unless current_user.admin?
+    unless current_user.admin?
+      flash[:danger] = '権限がありません'
+      redirect_to root_url 
+    end
   end
 
   def set_user
