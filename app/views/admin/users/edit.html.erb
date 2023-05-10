@@ -1,0 +1,33 @@
+<br>
+<h1>User Editing</h1>
+
+
+<%= form_with(model: [:admin, @user], local: true) do |f| %>
+<div class = "name" >
+  <%= f.label :NAME %>
+  <%= f.text_field :name %>
+</div>
+
+<div class = "email" >
+  <%= f.label :MEILS %>
+  <%= f.email_field :email %>
+</div>
+
+<div class = "email" >
+  <%= f.label :MANAGEMENT%>
+  <%= f.select :admin, [["一般ユーザー","false"],["管理者ユーザー","true"]] %>
+</div>
+
+<div class = "password" >
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+</div>
+
+<div class = "password_confirmation" >
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
+</div>
+
+  <%= f.submit "登録" %>
+  <%= link_to 'Back', admin_users_path %>
+<% end %>
