@@ -1,26 +1,26 @@
 <br>
-  <h1>ユーザー管理画面</h1>
-<%= link_to 'ユーザーを登録する',new_admin_user_path %>
-
-<table class="table table-striped">
-    <tr>
-      <th>NAME</th>
-      <th>MEILS</th>
-      <th>TASK COUNT</th>
-      <th>MANAGEMENT</th>
-      <th>SHOW</th>
-      <th>EDIT</th>
-      <th>DESTROY</th>
-    </tr>
-    <% @users.each do |user| %>
+  <h1>USER MANAGEMENT</h1>
+  <button type="button" class="btn btn-outline-info"><%=link_to 'New Task', new_admin_user_path %></button>
+  <br><br>
+    <table class="table table-striped">
       <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.tasks.count %></td>
-        <td><%= user.admin %></td>
-        <td><%= link_to 'Show', admin_user_path(user) %></td>
-        <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
-        <td><%= link_to 'Destroy', admin_user_path(user), method: :delete, date: { confirm: 'Are you sure？'} %></td>
+        <th>NAME</th>
+        <th>MEILS</th>
+        <th>TASK COUNTS</th>
+        <th>MANAGEMENT</th>
+        <th>SHOW</th>
+        <th>EDIT</th>
+        <th>DESTROY</th>
       </tr>
-    <% end %>
-</table>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.tasks.count %></td>
+          <td><%= user.admin %></td>
+          <td><%= link_to 'Show', admin_user_path(user), class:"btn btn-outline-primary"%></td>
+          <td><%= link_to 'Edit', edit_admin_user_path(user),class:"btn btn-outline-success" %></td>
+          <td><%= link_to 'Destroy', admin_user_path(user), method: :delete, date: { confirm: 'Are you sure？'} , class:"btn btn-outline-danger" %></td>
+        </tr>
+      <% end %>
+    </table>
