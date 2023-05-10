@@ -43,7 +43,7 @@ class Admin::UsersController < ApplicationController
 
   def admin_user
     unless current_user.admin?
-      flash[:danger] = '権限がありません'
+      flash[:notice] = 'NOT Access'
       redirect_to root_url 
     end
   end
