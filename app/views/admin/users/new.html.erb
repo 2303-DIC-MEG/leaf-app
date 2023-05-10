@@ -12,22 +12,22 @@
     </div>
   <% end %>
   
-  <%= link_to t('view.user_list'), admin_users_path %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+  <%= form_with(model: [:admin, @user], local: true) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
   
-  <%= f.label :admin %>
-  <%= f.select :admin, [["Public","false"],["Administrator","true"]], selected: 0 %>
-
-  <%= f.submit "Create my account" %>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+    
+    <%= f.label :admin %>
+    <%= f.select :admin, [["Public","false"],["Administrator","true"]], selected: 0 %>
+  
+    <%= f.submit "Create my account" %>
+  <% end %>
 <% end %>
