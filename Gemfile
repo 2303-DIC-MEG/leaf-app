@@ -39,3 +39,7 @@ gem 'kaminari'
 
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
+
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
