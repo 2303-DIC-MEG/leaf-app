@@ -27,7 +27,6 @@ RSpec.describe Task, type: :model do
     context 'scopeメソッドでタイトルのあいまい検索をした場合' do
       it "検索キーワードを含むタスクが絞り込まれる" do
         expect(Task.title_search('test_title')).to include(task)
-        binding.irb
         expect(Task.title_search('test_title').count).to eq 2
       end
     end
