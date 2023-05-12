@@ -16,16 +16,25 @@ class TasksController < ApplicationController
       title = params[:task][:title]
       status = params[:task][:status]
       label_id = params[:task][:label_id]
-      if title.present? && status.present?
-        @tasks = @tasks.title_search(title).status_search(status)
-      elsif title.present? && status.blank?
-        @tasks = @tasks.title_search(title)
-      elsif status.present?
-        @tasks = @tasks.status_search(status)
-      elsif title.blank? && status.blank? && label_id.present?
-        @tasks = @tasks.label_search(label_id)
-      end
-    end
+    
+      @tasks = @tasks.title_search(title) if title.present?
+      @tasks = @tasks.status_search(status) if status.present?
+      @tasks = @tasks.label_search(label_id) if title.blank? && status.blank? && label_id.present?
+    end 
+    # if params[:task].present?
+    #   title = params[:task][:title]
+    #   status = params[:task][:status]
+    #   label_id = params[:task][:label_id]
+    #   if title.present? && status.present?
+    #     @tasks = @tasks.title_search(title).status_search(status)
+    #   elsif title.present? && status.blank?
+    #     @tasks = @tasks.title_search(title)
+    #   elsif status.present?
+    #     @tasks = @tasks.status_search(status)
+    #   elsif title.blank? && status.blank? && label_id.present?
+    #     @tasks = @tasks.label_search(label_id)
+    #   end
+    # end
     @tasks = @tasks.page(params[:page]).per(8)
   end  
 
