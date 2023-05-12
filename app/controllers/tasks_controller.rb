@@ -15,18 +15,19 @@ class TasksController < ApplicationController
     if params[:task].present?
       title = params[:task][:title]
       status = params[:task][:status]
+      label_id = params[:task][:label_id]
       if title.present? && status.present?
         @tasks = @tasks.title_search(title).status_search(status)
       elsif title.present? && status.blank?
         @tasks = @tasks.title_search(title)
-      else
+      elsif status.present?
         @tasks = @tasks.status_search(status)
+      elsif title.blank? && status.blank? && label_id.present?
+        @tasks = @tasks.label_search(label_id)
       end
     end
     @tasks = @tasks.page(params[:page]).per(8)
-  end
-
-  
+  end  
 
   def show
   end
@@ -75,11 +76,10 @@ class TasksController < ApplicationController
 
   private
   
-    def set_task
-      @task = Task.find(params[:id])
-    end
-
-    def task_params
-      params.require(:task).permit(:title, :content, :expired_at, :status, :priority)
-    end
+  def set_task
+    @task = Task.find(params[:id])
+  end
+  def task_params
+    params.require(:task).permit(:title, :content, :expired_at, :status, :priority, { label_ids: [] })
+  end
 end

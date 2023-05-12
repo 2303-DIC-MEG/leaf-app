@@ -12,6 +12,8 @@ class Task < ApplicationRecord
 
   scope :title_search, -> (title){where('title LIKE ?', "%#{title}%")}
   scope :status_search, -> (status){where('status LIKE ?', "#{status}")}
+  scope :label_search, -> (label_id){ where(id: Labelling.where(label_id: label_id).pluck(:task_id))}
+
   scope :sort_expired_at, -> {order(expired_at: :desc)}
   scope :sort_priority, -> { order(priority: :asc) }
   
